@@ -7,12 +7,21 @@ import { useState } from "react";
 
 const FormularioTarea = () => {
   const [tarea, setTarea] = useState("");
+  const [tareas, setTareas] = useState([]);
 
-
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("dentro del evento submit");
+    //realizar algo similiar al tareas.push()
+    // operador spread ... 
+    setTareas([...tareas, tarea]);
+    //limpiar el formulario
+    setTarea('');
+  };
 
   return (
     <section>
-      <Form>
+      <Form onSubmit={handleSubmit}>
         <Form.Group
           className="mb-3 d-flex"
           controlId="exampleForm.ControlInput1"
@@ -22,7 +31,7 @@ const FormularioTarea = () => {
             placeholder="Ej: Tarea 1"
             minLength={3}
             maxLength={50}
-            onChange={(e)=> setTarea(e.target.value)}
+            onChange={(e) => setTarea(e.target.value)}
             value={tarea}
           />
           <Button variant="dark" className="ms-2" type="submit">
